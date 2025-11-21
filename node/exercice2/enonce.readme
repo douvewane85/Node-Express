@@ -1,0 +1,18 @@
+Enonce : Créer une calculatrice avec option suivante
+Add User
+Lister tous les Users
+Rechercher  un User par id
+Modifier  un  User
+Supprimer un User
+Quitter
+
+NB : 
+Un user(id,nom, prenom,email)
+Les Users sont stockés dans un Tableau
+
+Architecture : 
+
+Etapes : 
+Étape 1 : Créer le dossier du projet
+Étape 2 : Initialiser npm
+Étape 3 : Créer la structure de fichiers des modules 
