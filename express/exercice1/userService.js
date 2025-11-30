@@ -1,8 +1,32 @@
 import { users } from './data.js';
 
 class UserService {
-    getAllUsers() {
-        return users;
+    getAllUsers(role = null, page = 1, size = 2) {
+        let filteredUsers = users;
+        
+        // Filtrer par rôle si fourni
+        if (role) {
+            filteredUsers = users.filter(user => user.roles.some(r => r.name === role));
+        }
+        
+        // Appliquer la pagination
+        const pageNum = parseInt(page) || 1;
+        const pageSize = parseInt(size) || 10;
+        const startIndex = (pageNum - 1) * pageSize;
+        const endIndex = startIndex + pageSize;
+        const paginatedUsers = filteredUsers.slice(startIndex, endIndex);
+        
+       const data= {
+            data: paginatedUsers,
+            pagination: {
+                currentPage: pageNum,
+                pageSize: pageSize,
+                totalItems: filteredUsers.length,
+                totalPages: Math.ceil(filteredUsers.length / pageSize)
+            }
+        };
+        return data;
+        
     }
 
     getUserById(id) {
@@ -10,6 +34,7 @@ class UserService {
     }
 
     createUser(userData) {
+        if(userData.roles===undefined) userData.roles=[];
         const newUser = {
             id: users.length + 1,
             ...userData
